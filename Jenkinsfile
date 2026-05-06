@@ -16,7 +16,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'echo "Docker build simulation"'
+                sh 'echo "Docker step OK"'
             }
         }
     }

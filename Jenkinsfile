@@ -1,35 +1,23 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        sh '''stage(\'Build\') {
+    agent any
+
+    stages {
+        stage('Build') {
             steps {
-                echo \'Building application...\'
+                echo 'Building application...'
             }
-'''
-        }
-      }
-
-      stage('Test') {
-        steps {
-          sh ''' stage(\'Test\') {
-            steps {
-                echo \'Running tests...\'
-            }'''
-          }
         }
 
-        stage('docker build') {
-          steps {
-            sh '''stage(\'Docker Build\') {
+        stage('Test') {
             steps {
-                script {
-                    sh \'docker build -t myapp:latest .\'
-                }
-            }'''
+                echo 'Running tests...'
             }
-          }
-
         }
-      }
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t myapp:latest .'
+            }
+        }
+    }
+}

@@ -2,21 +2,22 @@ pipeline {
     agent any
 
     stages {
+
         stage('Build') {
             steps {
-                echo 'Building application...'
+                sh 'mvn clean package'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
+                sh 'mvn test'
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh 'echo "Docker step OK"'
+                sh 'docker build -t inventoryapp:latest .'
             }
         }
     }

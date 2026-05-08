@@ -5,21 +5,32 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                dir('inventory-app') {
+                    sh 'mvn clean package'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                dir('inventory-app') {
+                    sh 'mvn test'
+                }
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t inventoryapp:latest .'
+                dir('inventory-app') {
+                    sh 'docker build -t inventoryapp:latest .'
+                }
             }
         }
     }
+
+    post {
+        success {
+            echo 'sa marche bien 😎'
+        }
+    }
 }
-echo"sa marche bien";
